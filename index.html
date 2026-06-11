@@ -388,12 +388,68 @@
     .reveal.visible { opacity: 1; transform: none; }
 
     /* ═══════════════════════════════
+       HAMBURGER
+    ═══════════════════════════════ */
+    .hamburger {
+      display: none;
+      flex-direction: column; justify-content: center; align-items: center;
+      gap: 5px; width: 40px; height: 40px; cursor: pointer;
+      background: none; border: none; padding: 4px; z-index: 300;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 1.5px;
+      background: rgba(255,255,255,0.88);
+      transition: background 0.35s, transform 0.35s, opacity 0.35s;
+      transform-origin: center;
+    }
+    nav.scrolled .hamburger span { background: var(--dark); }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* モバイルドロワー */
+    .mobile-drawer {
+      display: none;
+      position: fixed; inset: 0; z-index: 250;
+      background: var(--dark);
+      flex-direction: column;
+      padding: 6rem 2.5rem 3rem;
+      overflow-y: auto;
+    }
+    .mobile-drawer.open { display: flex; }
+    .mobile-drawer a, .mobile-drawer .m-group-title {
+      font-family: var(--font-serif);
+      font-size: 1.6rem; font-weight: 300; letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.85); text-decoration: none;
+      padding: 0.9rem 0; border-bottom: 0.5px solid rgba(255,255,255,0.08);
+      display: block; transition: color 0.2s;
+    }
+    .mobile-drawer a:hover { color: var(--sage-light); }
+    .mobile-drawer .m-group-title {
+      font-size: 1rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--sage-light); margin-top: 1.5rem; border-bottom: none;
+      padding-bottom: 0.4rem; font-family: var(--font-sans); font-weight: 400;
+    }
+    .mobile-drawer .m-sub {
+      font-family: var(--font-jp); font-size: 0.95rem; font-weight: 300;
+      color: rgba(255,255,255,0.55); letter-spacing: 0.04em;
+      padding: 0.65rem 0 0.65rem 1rem; border-bottom: 0.5px solid rgba(255,255,255,0.06);
+    }
+    .mobile-drawer .m-online {
+      margin-top: 2.5rem; font-size: 0.8rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--sage-light);
+      border: 0.5px solid rgba(143,160,122,0.4); padding: 1rem 1.5rem;
+      text-align: center; border-bottom: 0.5px solid rgba(143,160,122,0.4) !important;
+    }
+
+    /* ═══════════════════════════════
        MOBILE
     ═══════════════════════════════ */
     @media (max-width: 960px) {
       nav { padding: 1rem 1.5rem; }
       nav.scrolled { padding: 0.75rem 1.5rem; }
       .nav-menu { display: none; }
+      .hamburger { display: flex; }
       .hero-content { padding: 0 1.5rem 5rem; }
       .hero-scroll { right: 1.5rem; }
       .concept { grid-template-columns: 1fr; padding: 6rem 1.5rem; gap: 3.5rem; }
@@ -422,9 +478,28 @@
 </head>
 <body>
 
+<!-- ═══ MOBILE DRAWER ═══ -->
+<div class="mobile-drawer" id="drawer">
+  <span class="m-group-title">Shop Info</span>
+  <a class="m-sub" href="index.html">二子玉川本店</a>
+  <a class="m-sub" href="#">ゆめが丘ソラトス店</a>
+  <a href="fair.html">Fair / Event</a>
+  <span class="m-group-title">Products</span>
+  <a class="m-sub" href="products.html">二子玉川本店</a>
+  <a class="m-sub" href="#">ゆめが丘ソラトス店</a>
+  <span class="m-group-title">Service</span>
+  <a class="m-sub" href="service.html">二子玉川本店</a>
+  <a class="m-sub" href="#">ゆめが丘ソラトス店</a>
+  <a href="contact.html">Contact</a>
+  <a class="m-online" href="https://protoleaf.thebase.in/" target="_blank" rel="noopener">Online Store ↗</a>
+</div>
+
 <!-- ═══ NAV ═══ -->
 <nav id="nav">
   <a class="nav-logo" href="index.html">PROTOLEAF</a>
+  <button class="hamburger" id="hamburger" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
   <ul class="nav-menu">
     <li class="nav-item has-dropdown">
       <span>Shop Info</span>
@@ -635,6 +710,21 @@
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  const hamburger = document.getElementById('hamburger');
+  const drawer = document.getElementById('drawer');
+  hamburger.addEventListener('click', () => {
+    const isOpen = drawer.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  drawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      drawer.classList.remove('open');
+      hamburger.classList.remove('open');
+      document.body.style.overflow = '';
+    });
   });
 
   const heroBg = document.getElementById('heroBg');
