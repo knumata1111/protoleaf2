@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service — PROTOLEAF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .services-wrap { padding: 5rem 5rem 8rem; }
+
+    /* ─── SERVICE BLOCK ─── */
+    .service-block {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      padding: 5rem 0;
+      border-bottom: 0.5px solid var(--border);
+      align-items: start;
+    }
+    .service-block:first-child { border-top: 0.5px solid var(--border); }
+    .service-num {
+      font-family: var(--font-serif);
+      font-size: 4rem;
+      font-weight: 300;
+      color: var(--border);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .service-label-wrap { position: sticky; top: 7rem; }
+    .service-name {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--dark);
+      line-height: 1.2;
+      margin-top: 0.5rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.02em;
+    }
+    .service-name em { font-style: italic; color: var(--sage); }
+    .service-badge {
+      display: inline-block;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border: 0.5px solid var(--sage-light);
+      color: var(--sage);
+    }
+
+    .service-detail { }
+    .service-intro {
+      font-family: var(--font-jp);
+      font-size: 0.95rem;
+      line-height: 2.1;
+      color: var(--mid);
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+
+    .option-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .option-card {
+      padding: 1.5rem;
+      background: var(--cream);
+      border: 0.5px solid var(--border);
+      transition: border-color 0.3s;
+    }
+    .option-card:hover { border-color: var(--sage-light); }
+    .option-card h4 {
+      font-family: var(--font-jp);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 0.6rem;
+    }
+    .option-card p {
+      font-family: var(--font-jp);
+      font-size: 0.8rem;
+      line-height: 1.85;
+      color: var(--mid);
+      font-weight: 300;
+    }
+
+    /* ─── POINT CARD ─── */
+    .point-section {
+      background: var(--dark);
+      padding: 6rem 5rem;
+    }
+    .point-section .section-label { color: var(--sage-light); }
+    .point-section .section-title { color: #fff; margin-bottom: 3rem; }
+    .point-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .point-card {
+      padding: 2rem 1.75rem;
+      border: 0.5px solid rgba(255,255,255,0.1);
+      transition: border-color 0.3s;
+    }
+    .point-card:hover { border-color: var(--sage-light); }
+    .point-card h4 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: #fff;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.02em;
+    }
+    .point-card h4 em { font-style: italic; color: var(--sage-light); }
+    .point-card p {
+      font-family: var(--font-jp);
+      font-size: 0.83rem;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.6);
+      font-weight: 300;
+    }
+    .point-highlight {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--sage-light);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ─── GREEN CARD ─── */
+    .green-card-section {
+      background: var(--cream);
+      padding: 6rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .green-card-visual {
+      background: var(--warm-white);
+      border: 0.5px solid var(--border);
+      padding: 3rem 2.5rem;
+      text-align: center;
+    }
+    .green-card-icon {
+      font-family: var(--font-serif);
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--sage);
+      letter-spacing: 0.1em;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .green-card-sub {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 2rem;
+    }
+    .green-card-benefit {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-top: 0.5px solid var(--border);
+      text-align: left;
+    }
+    .green-card-benefit:last-child { border-bottom: 0.5px solid var(--border); }
+    .benefit-pct {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 300;
+      color: var(--sage);
+      flex-shrink: 0;
+      width: 4rem;
+    }
+    .benefit-text {
+      font-family: var(--font-jp);
+      font-size: 0.82rem;
+      color: var(--mid);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .green-card-text .section-title { margin-bottom: 1.5rem; }
+    .green-card-text p {
+      font-family: var(--font-jp);
+      font-size: 0.88rem;
+      line-height: 2;
+      color: var(--mid);
+      font-weight: 300;
+    }
+
+    @media (max-width: 900px) {
+      .services-wrap { padding: 3rem 1.5rem 6rem; }
+      .service-block { grid-template-columns: 1fr; gap: 1.5rem; padding: 3.5rem 0; }
+      .service-label-wrap { position: static; }
+      .point-section { padding: 4rem 1.5rem; }
+      .point-grid { grid-template-columns: 1fr; }
+      .green-card-section { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav" class="solid">
+  <a class="nav-logo" href="index.html">PROTOLEAF</a>
+  <ul class="nav-menu">
+    <li class="nav-item">
+      <span>Shop Info</span>
+      <div class="dropdown">
+        <a href="index.html">二子玉川本店</a>
+        <a href="#">ゆめが丘ソラトス店</a>
+      </div>
+    </li>
+    <li class="nav-item"><a href="fair.html">Fair / Event</a></li>
+    <li class="nav-item">
+      <span>Products</span>
+      <div class="dropdown">
+        <a href="products.html">二子玉川本店</a>
+        <a href="#">ゆめが丘ソラトス店</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <span style="color:var(--sage)!important;">Service</span>
+      <div class="dropdown">
+        <a href="service.html">二子玉川本店</a>
+        <a href="#">ゆめが丘ソラトス店</a>
+      </div>
+    </li>
+    <li class="nav-item"><a href="contact.html">Contact</a></li>
+    <li class="nav-item"><a class="nav-online" href="https://protoleaf.thebase.in/" target="_blank" rel="noopener">Online Store ↗</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <p class="page-hero-label">Service — 二子玉川本店</p>
+  <h1 class="page-hero-title">各種<em>サービス</em></h1>
+  <p class="page-hero-sub">配送・植え替え・ポイントカードなど、植物をお迎えしてからも安心のサービスをご用意しています。</p>
+</div>
+
+<div class="services-wrap">
+
+  <!-- 配送 -->
+  <div class="service-block reveal">
+    <div class="service-label-wrap">
+      <div class="service-num">01</div>
+      <h2 class="service-name">配送<br><em>サービス</em></h2>
+      <span class="service-badge">Delivery</span>
+    </div>
+    <div class="service-detail">
+      <p class="service-intro">大きな植物もご自宅までお届けします。お客様のご要望に合わせて3種類の配送方法からお選びいただけます。</p>
+      <div class="option-grid">
+        <div class="option-card">
+          <h4>エリア便</h4>
+          <p>近隣エリアのお客様向け。手頃な料金でお届けします。時間指定・再配送は対応しておりません。</p>
+        </div>
+        <div class="option-card">
+          <h4>ガーデン便</h4>
+          <p>スタッフ2名がお伺いし、大型植物をご自宅の設置場所まで丁寧に運び込みます。</p>
+        </div>
+        <div class="option-card">
+          <h4>宅急便</h4>
+          <p>ヤマト運輸・佐川急便に対応。全国へお届けできます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 植え替え -->
+  <div class="service-block reveal">
+    <div class="service-label-wrap">
+      <div class="service-num">02</div>
+      <h2 class="service-name">植え替え<br><em>サービス</em></h2>
+      <span class="service-badge">Repotting</span>
+    </div>
+    <div class="service-detail">
+      <p class="service-intro">お買い上げいただいた植物を、お好みの鉢に植え替えるサービスです（有料）。スタッフにお任せいただくことも、ご自身で楽しんでいただくこともできます。</p>
+      <div class="option-grid">
+        <div class="option-card">
+          <h4>スタッフ植え込み</h4>
+          <p>購入した植物をスタッフが丁寧に植え替え。根の状態も確認しながら最適な環境を整えます。</p>
+        </div>
+        <div class="option-card">
+          <h4>セルフ植え替え</h4>
+          <p>店内の植え替えコーナーをご利用いただき、ご自身で植え替えをお楽しみいただけます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- POINT CARD -->
+<section class="point-section">
+  <p class="section-label">Membership</p>
+  <h2 class="section-title">ポイント<em>カード</em></h2>
+  <div class="point-grid reveal">
+    <div class="point-card">
+      <span class="point-highlight">1pt</span>
+      <h4>100円に<em>つき1pt</em></h4>
+      <p>お買い上げ100円ごとに1ポイント付与。100ポイントで100円分のお買い物にご利用いただけます。</p>
+    </div>
+    <div class="point-card">
+      <span class="point-highlight">×5</span>
+      <h4>毎月 7日・<em>8日は5倍</em></h4>
+      <p>毎月7日と8日はポイント5倍デー。まとめ買いのチャンスです。</p>
+    </div>
+    <div class="point-card">
+      <span class="point-highlight">♻</span>
+      <h4>土の回収<em>サービス</em></h4>
+      <p>プロトリーフ製の土袋をご利用のお客様は、使用済みの袋を店頭にてお引き取りします。</p>
+    </div>
+  </div>
+</section>
+
+<!-- GREEN CARD -->
+<section class="green-card-section">
+  <div class="green-card-visual reveal">
+    <span class="green-card-icon">Green<br>Card</span>
+    <p class="green-card-sub">Annual Membership</p>
+    <div class="green-card-benefit">
+      <span class="benefit-pct">20%</span>
+      <span class="benefit-text">プロトリーフ製品 全品割引（通年）</span>
+    </div>
+    <div class="green-card-benefit">
+      <span class="benefit-pct">15%</span>
+      <span class="benefit-text">誕生月は植物・資材 全品割引<br>※一部除外品あり</span>
+    </div>
+  </div>
+  <div class="green-card-text reveal">
+    <p class="section-label">Green Card</p>
+    <h2 class="section-title">年間購入額で<br><em>アップグレード</em></h2>
+    <p>グリーンカードは年間購入額に応じてランクアップする会員カードです。<br><br>プロトリーフ製品が通年20%割引になるほか、誕生月には植物・資材全品が15%割引（一部除外品あり）になる特典をご用意しています。<br><br>植物のある暮らしをもっとお得に、もっと楽しく。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-brand-logo">PROTOLEAF</div>
+      <p>東京都世田谷区玉川 3−17−1<br>玉川髙島屋S・C 本館屋上<br>TEL: 03-5716-8787</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop Info</h4>
+      <a href="index.html">二子玉川本店</a>
+      <a href="#">ゆめが丘ソラトス店</a>
+    </div>
+    <div class="footer-col">
+      <h4>Menu</h4>
+      <a href="fair.html">Fair / Event</a>
+      <a href="products.html">Products</a>
+      <a href="service.html">Service</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Online</h4>
+      <a href="https://protoleaf.thebase.in/" target="_blank" rel="noopener">Online Store ↗</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 PROTOLEAF All rights reserved.</p>
+    <a href="contact.html" style="font-size:0.72rem; letter-spacing:0.08em;">お問い合わせ</a>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 10) nav.classList.remove('solid');
+    else nav.classList.add('solid');
+  });
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

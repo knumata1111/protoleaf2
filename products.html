@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products — PROTOLEAF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ─── CATEGORY HERO ─── */
+    .cat-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 520px;
+      overflow: hidden;
+    }
+    .cat-hero-img {
+      position: relative;
+      overflow: hidden;
+    }
+    .cat-hero-img img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .cat-hero-body {
+      padding: 5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .cat-hero-body.bg-cream { background: var(--cream); }
+    .cat-hero-body.bg-dark { background: var(--dark); }
+    .cat-hero-body.bg-dark .section-label { color: var(--sage-light); }
+    .cat-hero-body.bg-dark .cat-title { color: #fff; }
+    .cat-hero-body.bg-dark p { color: rgba(255,255,255,0.7); }
+    .cat-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--dark);
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.02em;
+    }
+    .cat-title em { font-style: italic; color: var(--sage); }
+    .cat-hero-body.bg-dark .cat-title em { color: var(--sage-light); }
+    .cat-desc {
+      font-family: var(--font-jp);
+      font-size: 0.88rem;
+      line-height: 2.05;
+      color: var(--mid);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+    .cat-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .cat-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      padding: 0.3rem 0.8rem;
+      border: 0.5px solid var(--border);
+      color: var(--mid);
+      font-family: var(--font-jp);
+      font-weight: 300;
+    }
+    .cat-hero-body.bg-dark .cat-tag {
+      border-color: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ─── GRID SECTION ─── */
+    .products-grid-section {
+      padding: 5rem;
+      background: var(--cream);
+    }
+    .products-grid-section + .products-grid-section { background: var(--warm-white); }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .product-card {
+      background: var(--warm-white);
+      border: 0.5px solid var(--border);
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+    .products-grid-section + .products-grid-section .product-card { background: var(--cream); }
+    .product-card:hover { transform: translateY(-4px); }
+    .product-card img {
+      width: 100%; aspect-ratio: 4/3;
+      object-fit: cover; display: block;
+      transition: transform 0.6s ease;
+    }
+    .product-card:hover img { transform: scale(1.04); }
+    .product-card-body { padding: 1.25rem 1.25rem 1.5rem; }
+    .product-card-body h4 {
+      font-family: var(--font-jp);
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+    .product-card-body p {
+      font-family: var(--font-jp);
+      font-size: 0.8rem;
+      color: var(--mid);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* ─── BANNER ─── */
+    .online-banner {
+      background: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4rem 5rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .online-banner-text .section-label { color: var(--sage-light); }
+    .online-banner-text h2 {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: #fff;
+      margin-top: 0.5rem;
+      letter-spacing: 0.02em;
+    }
+    .online-banner-text h2 em { font-style: italic; color: var(--sage-light); }
+    .online-banner-text p {
+      font-family: var(--font-jp);
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+      font-weight: 300;
+      margin-top: 0.75rem;
+      line-height: 1.9;
+    }
+    .btn-outline-light {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.9rem 2.2rem;
+      border: 1px solid rgba(255,255,255,0.35);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.76rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: background 0.3s, border-color 0.3s;
+      white-space: nowrap;
+    }
+    .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); }
+
+    @media (max-width: 900px) {
+      .cat-hero { grid-template-columns: 1fr; }
+      .cat-hero-img { min-height: 280px; }
+      .cat-hero-body { padding: 3rem 1.5rem; }
+      .products-grid-section { padding: 4rem 1.5rem; }
+      .products-grid { grid-template-columns: 1fr 1fr; }
+      .online-banner { padding: 3rem 1.5rem; }
+    }
+    @media (max-width: 600px) {
+      .products-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav" class="solid">
+  <a class="nav-logo" href="index.html">PROTOLEAF</a>
+  <ul class="nav-menu">
+    <li class="nav-item">
+      <span>Shop Info</span>
+      <div class="dropdown">
+        <a href="index.html">二子玉川本店</a>
+        <a href="#">ゆめが丘ソラトス店</a>
+      </div>
+    </li>
+    <li class="nav-item"><a href="fair.html">Fair / Event</a></li>
+    <li class="nav-item">
+      <span style="color:var(--sage)!important;">Products</span>
+      <div class="dropdown">
+        <a href="products.html">二子玉川本店</a>
+        <a href="#">ゆめが丘ソラトス店</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <span>Service</span>
+      <div class="dropdown">
+        <a href="service.html">二子玉川本店</a>
+        <a href="#">ゆめが丘ソラトス店</a>
+      </div>
+    </li>
+    <li class="nav-item"><a href="contact.html">Contact</a></li>
+    <li class="nav-item"><a class="nav-online" href="https://protoleaf.thebase.in/" target="_blank" rel="noopener">Online Store ↗</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <p class="page-hero-label">Products — 二子玉川本店</p>
+  <h1 class="page-hero-title">取り扱い<em>品目</em></h1>
+  <p class="page-hero-sub">アウトドアプランツからインドアプランツ、ガーデニング用品・植木鉢まで。植物のある暮らしに必要なものが揃っています。</p>
+</div>
+
+<!-- OUTDOOR -->
+<div class="cat-hero reveal">
+  <div class="cat-hero-img">
+    <img src="https://www.protoleaf.com/wp-content/uploads/2024/11/本店紹介３.png" alt="アウトドアプランツ">
+  </div>
+  <div class="cat-hero-body bg-cream">
+    <p class="section-label">01 — Outdoor Plants</p>
+    <h2 class="cat-title">アウトドア<br><em>プランツ</em></h2>
+    <p class="cat-desc">草花・贈答用花・樹木・シンボルツリー・ハーブ・野菜。季節のお花から、庭先を飾る樹木まで幅広く取り揃えております。</p>
+    <div class="cat-tags">
+      <span class="cat-tag">草花</span>
+      <span class="cat-tag">贈答用花</span>
+      <span class="cat-tag">樹木・シンボルツリー</span>
+      <span class="cat-tag">ハーブ</span>
+      <span class="cat-tag">野菜苗</span>
+    </div>
+  </div>
+</div>
+
+<div class="products-grid-section">
+  <div class="products-grid reveal">
+    <div class="product-card">
+      <img src="https://www.protoleaf.com/wp-content/uploads/2024/11/本店紹介３.png" alt="季節の草花">
+      <div class="product-card-body">
+        <h4>季節の草花</h4>
+        <p>春夏秋冬、旬の草花を豊富にラインナップ。</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://www.protoleaf.com/wp-content/uploads/2024/11/本店紹介12.png" alt="樹木・シンボルツリー">
+      <div class="product-card-body">
+        <h4>樹木・シンボルツリー</h4>
+        <p>庭を彩るシンボルツリーや生垣向け樹木を展開。</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://www.protoleaf.com/wp-content/uploads/2024/11/本店紹介５.png" alt="ハーブ・野菜">
+      <div class="product-card-body">
+        <h4>ハーブ・野菜苗</h4>
+        <p>食べられる植物も充実。キッチンガーデンにも。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INDOOR -->
+<div class="cat-hero reveal">
+  <div class="cat-hero-body bg-dark">
+    <p class="section-label">02 — Indoor Plants</p>
+    <h2 class="cat-title">インドア<br><em>プランツ</em></h2>
+    <p class="cat-desc" style="color:rgba(255,255,255,0.65);">観葉植物・多肉植物・珍奇植物（アガベ、塊根、ユーフォルビアetc）・チランジア・ビカクシダ・洋ラン・着生蘭。大型からテーブルサイズまで豊富にラインナップ。</p>
+    <div class="cat-tags">
+      <span class="cat-tag">観葉植物</span>
+      <span class="cat-tag">多肉植物</span>
+      <span class="cat-tag">珍奇植物</span>
+      <span class="cat-tag">チランジア</span>
+      <span class="cat-tag">ビカクシダ</span>
+      <span class="cat-tag">洋ラン</span>
+    </div>
+  </div>
+  <div class="cat-hero-img">
+    <img src="https://www.protoleaf.com/wp-content/uploads/2024/11/本店紹介４.png" alt="インドアプランツ">
+  </div>
+</div>
+
+<div class="products-grid-section">
+  <div class="products-grid reveal">
+    <div class="product-card">
+      <img src="https://www.protoleaf.com/wp-content/uploads/2024/11/本店紹介４.png" alt="観葉植物">
+      <div class="product-card-body">
+        <h4>観葉植物</h4>
+        <p>大型から小型まで、インテリアに合わせて選べます。</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://www.protoleaf.com/wp-content/uploads/2024/11/本店紹介6.png" alt="珍奇植物">
+      <div class="product-card-body">
+        <h4>珍奇植物・塊根植物</h4>
+        <p>アガベ・コーデックス・ユーフォルビアなど希少種も。</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://www.protoleaf.com/wp-content/uploads/2024/11/本店紹介9.png" alt="チランジア">
+      <div class="product-card-body">
+        <h4>チランジア・着生植物</h4>
+        <p>エアプランツやビカクシダなど個性的な品種を展開。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<div class="cat-hero reveal">
+  <div class="cat-hero-img">
+    <img src="https://www.protoleaf.com/wp-content/uploads/2024/11/本店紹介10.png" alt="ガーデンツール">
+  </div>
+  <div class="cat-hero-body bg-cream">
+    <p class="section-label">03 — Garden Tools</p>
+    <h2 class="cat-title">ガーデンツール<br><em>&amp; 用品</em></h2>
+    <p class="cat-desc">培養土・肥料・農薬、ガーデニング用品・雑貨を取り扱う植物育成サポート商品。植物を長く元気に育てるためのアイテムが揃います。</p>
+    <div class="cat-tags">
+      <span class="cat-tag">培養土</span>
+      <span class="cat-tag">肥料</span>
+      <span class="cat-tag">農薬</span>
+      <span class="cat-tag">ガーデニング雑貨</span>
+    </div>
+  </div>
+</div>
+
+<!-- POTS -->
+<div class="cat-hero reveal">
+  <div class="cat-hero-body bg-dark">
+    <p class="section-label">04 — Pots &amp; Planters</p>
+    <h2 class="cat-title">植木鉢・<br><em>鉢カバー</em></h2>
+    <p class="cat-desc" style="color:rgba(255,255,255,0.65);">プラスチック・育苗ポット・大型鉢（陶器、樹脂）からインテリアポットまで多種多様。植物の個性を引き立てる器を見つけてください。</p>
+    <div class="cat-tags">
+      <span class="cat-tag">陶器鉢</span>
+      <span class="cat-tag">樹脂鉢</span>
+      <span class="cat-tag">大型鉢</span>
+      <span class="cat-tag">インテリアポット</span>
+      <span class="cat-tag">鉢カバー</span>
+    </div>
+  </div>
+  <div class="cat-hero-img">
+    <img src="https://www.protoleaf.com/wp-content/uploads/2024/11/本店紹介8.png" alt="植木鉢">
+  </div>
+</div>
+
+<!-- ONLINE BANNER -->
+<div class="online-banner reveal">
+  <div class="online-banner-text">
+    <p class="section-label">Online Store</p>
+    <h2>オンラインでも<br><em>お買い物</em></h2>
+    <p>店頭商品の一部はオンラインストアでもご購入いただけます。<br>全国配送対応。</p>
+  </div>
+  <a class="btn-outline-light" href="https://protoleaf.thebase.in/" target="_blank" rel="noopener">
+    オンラインストアへ ↗
+  </a>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-brand-logo">PROTOLEAF</div>
+      <p>東京都世田谷区玉川 3−17−1<br>玉川髙島屋S・C 本館屋上<br>TEL: 03-5716-8787</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop Info</h4>
+      <a href="index.html">二子玉川本店</a>
+      <a href="#">ゆめが丘ソラトス店</a>
+    </div>
+    <div class="footer-col">
+      <h4>Menu</h4>
+      <a href="fair.html">Fair / Event</a>
+      <a href="products.html">Products</a>
+      <a href="service.html">Service</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Online</h4>
+      <a href="https://protoleaf.thebase.in/" target="_blank" rel="noopener">Online Store ↗</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 PROTOLEAF All rights reserved.</p>
+    <a href="contact.html" style="font-size:0.72rem; letter-spacing:0.08em;">お問い合わせ</a>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 10) nav.classList.remove('solid');
+    else nav.classList.add('solid');
+  });
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
